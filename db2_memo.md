@@ -185,6 +185,10 @@ db2 "select varchar(auditpolicyname,20) as auditpolicyname,auditstatus,contextst
 
 db2 "select varchar(auditpolicyname,16) as auditpolicyname,objectname,objectschema,objecttype from syscat.audituse"
 
+db2 "select * from syscat.auditpolicies"
+
+db2 "select * from syscat.audituse"
+
 db2look -ap -d sample
 ```
 
@@ -250,6 +254,17 @@ db2audit extract deals to /db/dbaudit/work from files “*”  <- NG
 db2 "import from 00_zenkoku_all_20230929.csv of del commitcount 100000 insert into ZENKOKU"
 db2 "import from 40_fukuoka_all_20230929.csv of del commitcount 100000 insert into FUKUOKA"
 ```
+
+### IXFをインポート
+
+```sql
+db2 "IMPORT FROM zenkoku.ixf OF IXF MODIFIED BY FORCECREATE MESSAGES import_zenkoku.msg CREATE INTO ZENKOKU"
+
+```
+
+
+
+
 
 ## テーブル作成
 
@@ -427,5 +442,15 @@ db2set -all
 db2 "RESTORE DATABASE SAMPLE FROM /backup TAKEN AT 20240115213512 TO /home/db2inst2 WITHOUT ROLLING FORWARD"
 db2 "RESTORE DATABASE SAMPLE FROM /backup TAKEN AT 20240115213512 ON /home/db2inst2 WITHOUT ROLLING FORWARD"
 db2 "RESTORE DATABASE SAMPLE FROM /backup TAKEN AT 20240116014003 ON /home/db2inst3 DBPATH ON /home/db2inst3 WITHOUT ROLLING FORWARD"
+```
+
+
+
+## チューニングメモ
+
+書き出しアルゴリズムの設定
+
+```bash
+db2set DB2_USE_ALTERNATE_PAGE_CLEANING=ON
 ```
 
