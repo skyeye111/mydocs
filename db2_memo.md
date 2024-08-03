@@ -262,6 +262,21 @@ db2 "IMPORT FROM zenkoku.ixf OF IXF MODIFIED BY FORCECREATE MESSAGES import_zenk
 
 ```
 
+## LOAD
+
+```sql
+db2look -d sample -e -t zenkoku -o create_zenkoku.ddl
+db2 -tvf create_zenkoku.ddl
+db2 "select count(*) from zenkoku"
+
+```
+
+
+
+```sql
+db2 "load from zenkoku.ixf of ixf replace into ZENKOKU"
+```
+
 
 
 
@@ -307,6 +322,8 @@ db2 "select TBSPACEID from syscat.tables where TABNAME='ZENKOKU'"
 db2 "select TBSPACE from syscat.tablespaces where TBSPACEID = 3"
 
 db2 "select TBSPACE from syscat.tablespaces where TBSPACEID = (select TBSPACEID from syscat.tables where TABNAME='TOKYO')"
+
+db2 "select TBSPACE from syscat.tablespaces where TBSPACEID = (select TBSPACEID from syscat.tables where TABNAME='ZENKOKU')"
 ```
 
 ## テーブルスペースの管理
