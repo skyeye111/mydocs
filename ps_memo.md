@@ -52,6 +52,6 @@ ping -t www.yahoo.co.jp 2>&1 | ForEach-Object { "$(Get-Date -Format "yyyy/MM/dd 
 
 
 
-
+## memo
 
 
