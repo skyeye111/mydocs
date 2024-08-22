@@ -39,3 +39,19 @@ Move-FilesByDate -sourceFolder $sourceFolder -targetFolder $targetFolder
 
 ```
 
+
+
+
+
+## ping
+
+```powershell
+ping -t www.yahoo.co.jp | ForEach-Object { "$(Get-Date -Format "yyyy/MM/dd HH:mm:ss") $_" } | Tee-Object -FilePath ("ping_" + (Get-Date -Format "yyyyMMdd_HHmmss") + ".log")
+```
+
+
+
+
+
+
+
